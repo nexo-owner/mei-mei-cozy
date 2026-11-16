@@ -28,6 +28,7 @@ export function save() {
   try { localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }
   catch(error) { console.warn('Could not save island progress.',error); }
   updateWallet();
+  window.dispatchEvent(new Event('mei-mei-progress'));
 }
 export function notify(message) {
   const el=document.getElementById('toast'); if(!el)return;
