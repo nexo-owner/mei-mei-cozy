@@ -1,19 +1,16 @@
-# Mei Mei's Cozy Corner
+# Mei Mei's Cozy Island
 
-A small, cozy browser game collection featuring fishing, cooking and cleaning.
+A cozy, modular browser game with a small island hub, fishing, cooking, cleaning, dress-up, furniture shopping and cottage decorating.
 
-## Project structure
+## Structure
+- index.html: page layout
+- css/style.css: responsive styling
+- js/main.js: saved game state and mini-game navigation
+- js/world.js: island map, wardrobe, furniture shop and cottage
+- js/games/: individual mini-game modules
+- assets/images/: character artwork
 
-- `index.html` — page structure and game entry point
-- `css/style.css` — all visual styles and responsive layout
-- `js/main.js` — app startup, shared state, save data and navigation
-- `js/games/fishing.js` — fishing game
-- `js/games/cooking.js` — recipe and cooking game
-- `js/games/cleaning.js` — cottage cleaning game
-- `assets/images/` — illustrations and image assets
+## Run
+Serve the project with a local web server (VS Code Live Server, Python http.server, etc.). ES modules need HTTP rather than opening the file directly.
 
-## Run locally
-
-Because the JavaScript uses ES modules, run this project through a local web server (for example, VS Code Live Server) rather than opening `index.html` directly.
-
-Progress and cozy coins are saved in the browser using localStorage.
+Progress is saved locally in the browser. No external game engine or large framework is required.
