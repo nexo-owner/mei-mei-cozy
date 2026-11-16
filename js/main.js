@@ -2,6 +2,7 @@ import { initFishing } from './games/fishing.js';
 import { initCooking } from './games/cooking.js';
 import { initCleaning } from './games/cleaning.js';
 import { initWorld } from './world.js';
+import { initImmersion } from './immersion.js';
 
 const SAVE_KEY = 'mei-mei-cozy-save';
 function readSave() {
@@ -43,4 +44,5 @@ document.querySelectorAll('[data-open]').forEach(button=>button.addEventListener
   panel.scrollIntoView({behavior:'smooth',block:'start'});
 }));
 initWorld();
+initImmersion();
 updateWallet();
