@@ -381,7 +381,7 @@ export function startIsland({ onInteract, onClock } = {}) {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key) && started) event.preventDefault();
     keys.add(event.key.toLowerCase());
     if (event.key.toLowerCase() === 'e') interact();
-    if (event.key === 'Escape' && started) document.getElementById('pause-button')?.click();
+
   }
   function keyup(event) { keys.delete(event.key.toLowerCase()); }
   window.addEventListener('keydown', keydown);
