@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.m
 
 const $=id=>document.getElementById(id);
 const SAVE='mei-mei-3d-save';
-const defaults={coins:35,fish:0,meals:0,visited:[],items:['starter-chair'],settings:{quality:'high',shadows:true,particles:true,showHints:true}};
+const defaults={coins:35,fish:0,meals:0,visited:[],items:['🪑 Wooden chair'],settings:{quality:'high',shadows:true,particles:true,showHints:true}};
 let data;try{data={...defaults,...JSON.parse(localStorage.getItem(SAVE)||'{}')};data.settings={...defaults.settings,...(data.settings||{})}}catch{data={...defaults,settings:{...defaults.settings}}}
 const save=()=>{try{localStorage.setItem(SAVE,JSON.stringify(data))}catch{};updateHUD()};
 function updateHUD(){$('coin-count').textContent=data.coins}
