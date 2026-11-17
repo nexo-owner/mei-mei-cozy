@@ -391,6 +391,7 @@ export function startIsland({ onInteract, onClock } = {}) {
     button.addEventListener('pointerdown', event => { event.preventDefault(); touchKeys.add(key); });
     ['pointerup', 'pointerleave', 'pointercancel'].forEach(type => button.addEventListener(type, () => touchKeys.delete(key)));
   });
+  document.getElementById('play-button')?.addEventListener('click', () => { started = true; });
   document.getElementById('interaction-hint')?.addEventListener('click', interact);
   canvas.addEventListener('pointerdown', event => { dragging = true; lastX = event.clientX; });
   window.addEventListener('pointerup', () => { dragging = false; });
