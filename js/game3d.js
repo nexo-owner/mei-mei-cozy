@@ -374,8 +374,11 @@ export function startIsland({ onInteract, onClock } = {}) {
   function inIsland(x, z) {
     return (x * x) / (14.5 * 14.5) + (z * z) / (10.8 * 10.8) < .94;
   }
+  function controlsEnabled() {
+    return started && document.getElementById('modal-backdrop')?.classList.contains('hidden') && document.getElementById('pause-menu')?.classList.contains('hidden');
+  }
   function interact() {
-    if (started && active) onInteract?.(active.id);
+    if (controlsEnabled() && active) onInteract?.(active.id);
   }
   function keydown(event) {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key) && started) event.preventDefault();
@@ -407,7 +410,7 @@ export function startIsland({ onInteract, onClock } = {}) {
     animationFrame = requestAnimationFrame(frame);
     const dt = Math.min((now - last) / 1000, .04);
     last = now;
-    if (started) {
+    if (controlsEnabled()) {
       let dx = 0, dz = 0;
       if (keys.has('w') || keys.has('arrowup') || touchKeys.has('w')) dz -= 1;
       if (keys.has('s') || keys.has('arrowdown') || touchKeys.has('s')) dz += 1;
@@ -449,7 +452,7 @@ export function startIsland({ onInteract, onClock } = {}) {
     }
     const hint = document.getElementById('interaction-hint');
     if (hint) {
-      hint.classList.toggle('hidden', !started || !active);
+      hint.classList.toggle('hidden', !controlsEnabled() || !active);
       if (active) document.getElementById('interaction-label').textContent = active.label;
     }
     neighbours.forEach(({ sprite, x, z }) => {
