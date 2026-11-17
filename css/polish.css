@@ -96,3 +96,11 @@ button:disabled{filter:saturate(.65)}
 @media(max-width:760px){.hero{padding-top:48px;padding-bottom:35px}.hero h1{letter-spacing:-3px}.hero-art{min-height:300px;border-width:6px;border-radius:28px}.section{padding-top:65px;padding-bottom:65px}.cover{height:145px}.topbar{gap:10px}.topbar nav{overflow-x:auto;justify-content:flex-start;padding:3px 2px 5px;white-space:nowrap}.logo{font-size:19px}.island-board{gap:10px}.island-place{min-height:142px}.counters{justify-content:flex-start}.counters span{padding:9px 12px}}
 @media(max-width:420px){.hero h1{font-size:52px}.section-title h2{font-size:34px}.island-place{padding:12px 6px}.island-place b{font-size:14px}.villager-board{gap:5px}.villager-card{padding:9px 3px}.villager-card small{font-size:8px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Illustrated island backdrop */
+.hero-art{background-image:linear-gradient(180deg,#dce9d833,#a8cbb344),url('../assets/images/island-diorama.svg');background-size:cover;background-position:center 58%}
+.hero-art img{width:44%;max-height:230px;align-self:end;margin-bottom:46px}
+.hero-art .sun{display:none}
+.hero-art:before{z-index:0;left:0;bottom:0;width:100%;height:40%;border-radius:0;background:linear-gradient(0deg,#8fb79b55,transparent);filter:none;box-shadow:none}
+.hero-art:after{z-index:0;right:15px;top:15px;width:calc(100% - 30px);height:calc(100% - 30px);border:1px solid #ffffff8c;border-radius:25px}
+@media(max-width:760px){.hero-art img{width:48%;max-height:190px;margin-bottom:44px}}
