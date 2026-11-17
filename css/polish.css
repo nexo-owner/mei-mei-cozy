@@ -1,0 +1,98 @@
+/* A softer, more polished visual layer for Mei Mei's Cozy Island */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+:root{--cream:#faf6ef;--paper:#fffefa;--ink:#51453e;--muted:#98877b;--rose:#cf8589;--sage:#8fa98b;--line:#eadfd2;--shadow:0 16px 45px rgba(92,72,54,.09);--shadow-hover:0 24px 55px rgba(92,72,54,.14);--serif:'Playfair Display',Georgia,serif}
+html{scroll-padding-top:100px;scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 8% 5%,#f2e8dc 0,transparent 31rem),radial-gradient(ellipse at 94% 28%,#e8f0e6 0,transparent 34rem),var(--cream);color:var(--ink);letter-spacing:.005em}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E")}
+.topbar{min-height:76px;padding-top:12px;padding-bottom:12px;background:rgba(250,246,239,.88);border-bottom:1px solid rgba(234,223,210,.8);box-shadow:0 5px 25px #594b3b08}
+.logo{font-size:22px;letter-spacing:-.8px}.logo span{display:inline-block;animation:heart-float 2.8s ease-in-out infinite}
+@keyframes heart-float{50%{transform:translateY(-3px) rotate(8deg)}}
+nav{gap:clamp(10px,2vw,24px);font-size:12px;letter-spacing:.03em}nav a{position:relative;padding:9px 0}nav a:after{content:"";position:absolute;bottom:2px;left:0;width:100%;height:2px;border-radius:9px;background:var(--rose);transform:scaleX(0);transform-origin:right;transition:transform .25s}nav a:hover:after{transform:scaleX(1);transform-origin:left}
+.wallet{background:#fffefa;border-color:#eadfd2;box-shadow:0 4px 15px #6954490c;padding:10px 16px}
+.hero{padding-top:78px;padding-bottom:58px;gap:clamp(30px,6vw,82px)}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:99px;background:#e9f0e5;color:#70876c;letter-spacing:1.5px}
+.hero h1{font-size:clamp(54px,7.6vw,94px);line-height:.96;letter-spacing:-4.5px;margin:20px 0 18px}
+.hero h1 em{font-family:var(--serif);font-weight:600;letter-spacing:-3px;color:#c77e83}
+.lead{font-size:15px;line-height:1.9;max-width:450px}
+.button{padding:14px 21px;background:linear-gradient(135deg,#d99a98,#c77d84);box-shadow:0 8px 18px #c77d8430;letter-spacing:.01em;transition:transform .25s,box-shadow .25s,filter .25s}
+.button:hover{transform:translateY(-3px);box-shadow:0 13px 24px #c77d8440;filter:brightness(1.025)}
+.hero-art{min-height:410px;border:8px solid #fffaf2;border-radius:38px;background:radial-gradient(circle at 70% 25%,#fff4cb 0 7%,transparent 7.5%),linear-gradient(155deg,#dce9d8 0%,#c6e0d9 54%,#b8d6d4 100%);box-shadow:0 25px 65px #71856c25,inset 0 0 0 1px #ffffffa8}
+.hero-art:before,.hero-art:after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.hero-art:before{width:260px;height:100px;background:#ffffff3d;left:-45px;bottom:25px;filter:blur(2px);box-shadow:310px -12px 0 12px #ffffff24}
+.hero-art:after{width:150px;height:150px;border:1px solid #ffffff70;right:28px;top:25px}
+.hero-art img{width:72%;max-height:320px;z-index:1;filter:drop-shadow(0 20px 12px #536b5738);animation:bob 4s ease-in-out infinite}
+.sun{z-index:1;right:48px;top:35px;font-size:42px;filter:drop-shadow(0 5px 12px #eacb7c66)}
+.caption{z-index:2;bottom:22px;box-shadow:0 5px 18px #6a78651a;color:#776459;border:1px solid #fff}
+.counters{padding-top:4px;padding-bottom:6px;gap:12px}
+.counters span{padding:11px 17px;background:#fffefa;border-color:#eee4d9;box-shadow:0 5px 18px #69544909;font-size:12px;color:#927d6d}
+.counters b{color:#665349;margin-left:4px}
+.section{padding-top:86px;padding-bottom:86px}
+.section-title{margin-bottom:34px}
+.section-title .eyebrow{letter-spacing:2.1px}
+.section-title h2,.about h2{font-size:clamp(35px,4.8vw,51px);letter-spacing:-1.8px;color:#58483e}
+.section-title h2{position:relative;display:inline-block}
+.section-title h2:after{content:"";display:block;width:48px;height:3px;margin:12px auto 0;border-radius:10px;background:linear-gradient(90deg,#d8a2a0,#a9bd9f)}
+.section-title>p:last-child{font-size:14px;max-width:540px}
+.cards{gap:22px}
+.card{padding:15px 15px 18px;border-radius:25px;background:rgba(255,254,250,.92);border-color:#eee4d9;box-shadow:0 9px 30px #6954490b;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-7px);box-shadow:var(--shadow-hover)}
+.cover{height:168px;border-radius:19px;position:relative;overflow:hidden}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#ffffff36,transparent 55%);pointer-events:none}
+.pond-cover{background:radial-gradient(ellipse at 50% 110%,#7db5bb 0 43%,transparent 44%),linear-gradient(#dcebed,#c7e3df)}
+.kitchen-cover{background:radial-gradient(circle at 80% 20%,#fff5dc 0 10%,transparent 10.5%),linear-gradient(145deg,#f5e4d0,#eac7bb)}
+.clean-cover{background:radial-gradient(circle at 15% 80%,#ffffff80 0 12%,transparent 12.5%),linear-gradient(145deg,#e4ecdb,#c9dac1)}
+.card h3{font-size:22px;letter-spacing:-.5px;margin:17px 2px 5px}
+.card p{margin:0 2px 10px;min-height:44px;line-height:1.7}
+.card .button{margin-top:8px}
+.panel-empty,.activity,.feature-panel{border:1px solid #eee4d9;border-radius:26px;background:rgba(255,254,250,.94);box-shadow:0 12px 38px #6954490b}
+.panel-empty{padding:42px 20px}
+.activity,.feature-panel{padding:clamp(18px,3vw,30px)}
+.activity-head{padding-bottom:13px;border-bottom:1px solid #f0e7dc}
+.activity h3{font-size:25px;letter-spacing:-.5px}
+.stat{background:#f4eee5;color:#8a7566;border:1px solid #eee4d9}
+.scene,.clean-scene,.pot-scene{border:1px solid #ffffffa8;box-shadow:inset 0 0 30px #ffffff38}
+.scene{background:linear-gradient(145deg,#eaf1e5,#e0eeee);padding:24px}
+.pond{box-shadow:inset 0 8px 20px #ffffff55;border:5px solid #ffffff8c}
+.fish{filter:drop-shadow(0 3px 3px #456c6c55);transition:filter .2s}
+.fish:hover{filter:drop-shadow(0 6px 6px #456c6c55) brightness(1.1)}
+.actions button,.recipe-tabs button{transition:transform .2s,background .2s;box-shadow:0 3px 9px #6954490a}
+.actions button:hover,.recipe-tabs button:hover{transform:translateY(-2px);background:#e9dfd3}
+.ingredient,.option,.shop-item,.owned-item{transition:transform .2s,border-color .2s,box-shadow .2s}
+.ingredient:hover,.option:hover,.owned-item:hover{transform:translateY(-2px);box-shadow:0 6px 16px #69544910}
+.feature-section{background:linear-gradient(180deg,#f3ece3,#f7f0e8);border-top:1px solid #eee5db;border-bottom:1px solid #eee5db}
+.island-board{gap:15px}
+.island-place{position:relative;min-height:164px;border:1px solid #ffffff;background:linear-gradient(145deg,#e6efdf,#d2e6dc);box-shadow:0 8px 22px #61765a10;overflow:hidden}
+.island-place:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:#ffffff30;right:-55px;top:-58px;transition:transform .35s}
+.island-place:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 16px 30px #61765a20}
+.island-place:hover:after{transform:scale(1.7)}
+.island-place span{filter:drop-shadow(0 5px 3px #647d5b20);font-size:43px}
+.island-place b{font-size:16px;z-index:1}
+.island-place small{font-size:11px;z-index:1}
+.island-note{padding:13px 18px;border-radius:99px;background:#edf2e8;max-width:620px;margin:18px auto 0}
+.island-life{padding:clamp(18px,3vw,30px);border:8px solid #fffaf2;box-shadow:0 20px 55px #71856c1c}
+.daily-board,.villager-board-wrap{box-shadow:0 7px 22px #69544908;border-color:#f0e8dd}
+.villager-card{min-height:125px}
+.villager-card:hover{box-shadow:0 8px 18px #69544910}
+.wardrobe-layout{gap:30px}
+.avatar-stage{border:7px solid #fffaf2;box-shadow:0 12px 28px #71856c17}
+.avatar-preview img{filter:drop-shadow(0 12px 8px #536b5730)}
+.option{background:#fffefa;border-color:#eee4d9}
+.option.selected{border:2px solid #cf8589;background:#fff2ef;box-shadow:0 5px 14px #cf85891c}
+.shop-grid{gap:14px}
+.shop-item{border-color:#eee4d9;background:#fffefa;transition:transform .25s,box-shadow .25s}
+.shop-item:hover{transform:translateY(-4px);box-shadow:0 12px 24px #69544912}
+.shop-emoji{background:linear-gradient(145deg,#f6f0e7,#eee7dc)}
+.small-button{transition:transform .2s,filter .2s;box-shadow:0 4px 10px #cf858925}
+.small-button:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.05)}
+.home-room{border:9px solid #c8a98d;box-shadow:0 15px 35px #7b604b20}
+.room-wall{background:linear-gradient(#f7eadd 0 72%,#d2ae8d 72%)}
+.placed-items span{filter:drop-shadow(0 6px 4px #6d59432b)}
+.owned-item{border-color:#eee4d9;background:#fffefa}
+.owned-item.in-room{border:2px solid #9eb496;background:#f0f5eb}
+footer{padding:42px 20px;background:#f4ece2;border-top:1px solid #ece1d4;color:#907d6f}
+.toast{box-shadow:0 10px 30px #4f6c4e30;z-index:20}
+:focus-visible{outline:3px solid #cf8589!important;outline-offset:3px}
+button:disabled{filter:saturate(.65)}
+@media(max-width:760px){.hero{padding-top:48px;padding-bottom:35px}.hero h1{letter-spacing:-3px}.hero-art{min-height:300px;border-width:6px;border-radius:28px}.section{padding-top:65px;padding-bottom:65px}.cover{height:145px}.topbar{gap:10px}.topbar nav{overflow-x:auto;justify-content:flex-start;padding:3px 2px 5px;white-space:nowrap}.logo{font-size:19px}.island-board{gap:10px}.island-place{min-height:142px}.counters{justify-content:flex-start}.counters span{padding:9px 12px}}
+@media(max-width:420px){.hero h1{font-size:52px}.section-title h2{font-size:34px}.island-place{padding:12px 6px}.island-place b{font-size:14px}.villager-board{gap:5px}.villager-card{padding:9px 3px}.villager-card small{font-size:8px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
