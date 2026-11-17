@@ -20,7 +20,7 @@ export function startIsland({onInteract,onClock}={}){
  path([[-1,9],[-1,6],[0,3],[1,0],[0,-3],[0,-7]],1.65);path([[0,1],[4,2],[7,1],[9,-2]],1.3);path([[0,-3],[-4,-4],[-8,-3],[-10,-1]],1.2);path([[1,4],[5,6],[8,5]],1.1);
  function box(parent,w,h,d,material,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
  function house(x,z,wall,roofColor,scale=1){const g=new THREE.Group();g.position.set(x,.8,z);g.scale.setScalar(scale);scene.add(g);box(g,3.5,2.3,2.8,mat(wall),0,1.2,0);const r=new THREE.Mesh(new THREE.ConeGeometry(2.65,1.5,4),mat(roofColor));r.rotation.y=Math.PI/4;r.position.set(0,3.0,0);r.castShadow=true;g.add(r);box(g,.72,1.35,.12,wood,0,.72,1.43);box(g,.7,.65,.13,mat('#a8c9c4'),-1.05,1.55,1.45);box(g,.7,.65,.13,mat('#a8c9c4'),1.05,1.55,1.45);box(g,.82,.12,.2,cream,0,1.4,1.55);return g}
- house(-6,-5,'#f4dfc2','#d58d83',1.15);house(7,-4,'#f3e8cf','#9caf91',.85);house(8,5,'#f1d8d1','#c98683',.8);
+ house(-6,-5,'#f4dfc2','#d58d83',1.15);house(7,-4,'#f3e8cf','#9caf91',.85);house(8,5,'#f1d8d1','#c98683',.8);house(1,-5.5,'#f4e4c8','#d5a66f',.72);
  // pond
  const pond=new THREE.Mesh(new THREE.CircleGeometry(2.45,48),water);pond.rotation.x=-Math.PI/2;pond.scale.set(1.25,.8,1);pond.position.set(-7,.79,3);scene.add(pond);
  const pondEdge=new THREE.Mesh(new THREE.TorusGeometry(2.45,.22,12,48),sand);pondEdge.rotation.x=Math.PI/2;pondEdge.scale.set(1.25,.8,1);pondEdge.position.set(-7,.8,3);scene.add(pondEdge);
@@ -38,15 +38,19 @@ export function startIsland({onInteract,onClock}={}){
  const textureLoader=new THREE.TextureLoader();const catTexture=textureLoader.load(new URL('../assets/images/mei-mei.svg',import.meta.url).href);catTexture.colorSpace=THREE.SRGBColorSpace;
  const cat=new THREE.Sprite(new THREE.SpriteMaterial({map:catTexture,transparent:true,depthWrite:false}));cat.scale.set(1.95,1.7,1);cat.position.set(0,1.75,6);scene.add(cat);
  const shadow=new THREE.Mesh(new THREE.CircleGeometry(.58,24),new THREE.MeshBasicMaterial({color:'#405c48',transparent:true,opacity:.2}));shadow.rotation.x=-Math.PI/2;shadow.position.set(0,.79,6);scene.add(shadow);
+ // Friendly 2D neighbours: flat, camera-facing sprites among the 3D scenery.
+ function neighbour(emoji,x,z,name){const cv=document.createElement('canvas');cv.width=256;cv.height=320;const c=cv.getContext('2d');c.font='170px serif';c.textAlign='center';c.textBaseline='middle';c.fillText(emoji,128,150);c.font='bold 25px sans-serif';c.fillStyle='#fffaf0';c.strokeStyle='#63785d';c.lineWidth=5;c.strokeText(name,128,282);c.fillText(name,128,282);const tex=new THREE.CanvasTexture(cv);const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthWrite:false}));s.scale.set(1.45,1.8,1);s.position.set(x,1.7,z);scene.add(s);neighbours.push({sprite:s,x,z})}
+ neighbour('🐧',-2,1,'Pip');neighbour('🐻',3,3,'Mochi');neighbour('🐰',8,5,'Clover');
  // little signposts
  function sign(x,z,label){const g=new THREE.Group();g.position.set(x,.8,z);scene.add(g);box(g,.12,1,.12,wood,0,.5,0);box(g,1.2,.42,.14,cream,0,.95,.04);const cv=document.createElement('canvas');cv.width=256;cv.height=96;const ctx=cv.getContext('2d');ctx.fillStyle='#5d7156';ctx.font='bold 29px sans-serif';ctx.textAlign='center';ctx.fillText(label,128,59);const tex=new THREE.CanvasTexture(cv);const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:true}));sprite.scale.set(1.05,.4,1);sprite.position.set(0,1,.12);g.add(sprite)}
- sign(-7,5,'POND');sign(-6,-6.8,'COTTAGE');sign(7,-5.5,'MARKET');sign(8,6,'GARDEN');
- const hotspots=[{id:'fishing',label:'Go fishing',x:-7,z:3,r:3.2},{id:'home',label:'Visit your cottage',x:-6,z:-5,r:3},{id:'shop',label:'Visit the little shop',x:7,z:-4,r:3},{id:'cleaning',label:'Tidy the cottage',x:-6,z:-5,r:3},{id:'cooking',label:'Cook something lovely',x:-6,z:-5,r:3},{id:'wardrobe',label:'Change your outfit',x:-6,z:-5,r:3},{id:'garden',label:'Explore the flower garden',x:8,z:5,r:3}];
- const keys=new Set();const pressed=new Set();let active=null,started=false,last=performance.now(),walk=0,clockLast=0;
+ sign(-7,5,'POND');sign(-6,-6.8,'COTTAGE');sign(7,-5.5,'MARKET');sign(8,6,'GARDEN');sign(1,-7,'BAKERY');
+ const hotspots=[{id:'fishing',label:'Go fishing',x:-7,z:3,r:3.2},{id:'home',label:'Visit your cottage',x:-6,z:-5,r:2.5},{id:'cleaning',label:'Tidy the cottage',x:-3.2,z:-5,r:1.8},{id:'cooking',label:'Visit the bakery kitchen',x:1,z:-5.5,r:2.3},{id:'shop',label:'Visit the little shop',x:7,z:-4,r:3},{id:'garden',label:'Explore the flower garden',x:8,z:5,r:3}];
+ const keys=new Set();const pressed=new Set();let active=null,started=false,last=performance.now(),walk=0,clockLast=0;const neighbours=[];
  const keydown=e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();keys.add(e.key.toLowerCase());if(e.key.toLowerCase()==='e'&&active&&started)onInteract?.(active.id==='garden'?'journal':active.id);if(e.key==='Escape')document.getElementById('pause-button')?.click()};
  const keyup=e=>keys.delete(e.key.toLowerCase());window.addEventListener('keydown',keydown);window.addEventListener('keyup',keyup);
  document.querySelectorAll('[data-move]').forEach(btn=>{const k={up:'w',down:'s',left:'a',right:'d'}[btn.dataset.move];btn.addEventListener('pointerdown',e=>{e.preventDefault();pressed.add(k)});['pointerup','pointerleave','pointercancel'].forEach(ev=>btn.addEventListener(ev,()=>pressed.delete(k)))});
  document.getElementById('play-button').addEventListener('click',()=>{started=true});
+ document.getElementById('interaction-hint').addEventListener('click',()=>{if(active&&started)onInteract?.(active.id)});
  let dragging=false,lastX=0;canvas.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX});window.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointermove',e=>{if(dragging&&started){cameraAngle+=(e.clientX-lastX)*.004;lastX=e.clientX}});
  let cameraAngle=0;
  const player=new THREE.Vector3(0,0,6);
@@ -57,7 +61,7 @@ export function startIsland({onInteract,onClock}={}){
    }
    const target=new THREE.Vector3(player.x,0,player.z);const offset=new THREE.Vector3(Math.sin(cameraAngle)*13,10,Math.cos(cameraAngle)*15);const desired=target.clone().add(offset);camera.position.lerp(desired,1-Math.pow(.001,dt));camera.lookAt(player.x,.4,player.z-1.2);
    active=null;let best=999;for(const h of hotspots){const d=Math.hypot(player.x-h.x,player.z-h.z);if(d<h.r&&d<best){active=h;best=d}}
-   const hint=document.getElementById('interaction-hint');if(hint){hint.classList.toggle('hidden',!started||!active);if(active)document.getElementById('interaction-label').textContent=active.label}
+   const hint=document.getElementById('interaction-hint');if(hint){hint.classList.toggle('hidden',!started||!active);if(active)document.getElementById('interaction-label').textContent=active.label}neighbours.forEach(n=>{n.sprite.material.rotation=Math.sin(now*.001+n.x)*.025;n.sprite.position.y=1.7+Math.sin(now*.002+n.z)*.035});
    clouds.forEach((c,i)=>{c.position.x+=dt*(.12+i*.012);if(c.position.x>23)c.position.x=-23});
    water.color.setHSL(.51,.34,.59+Math.sin(now*.0007)*.018);
    const hour=new Date().getHours();const night=hour<6||hour>20;sun.intensity=night?1.15:3;hemi.intensity=night?1.05:2;scene.fog.color.set(night?'#879da9':'#c7ded7');scene.background.set(night?'#879da9':'#b9d8d5');
