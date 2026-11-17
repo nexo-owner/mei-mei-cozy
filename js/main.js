@@ -56,4 +56,4 @@ document.getElementById('pause-button').addEventListener('click',()=>document.ge
 document.getElementById('resume-button').addEventListener('click',()=>document.getElementById('pause-menu').classList.add('hidden'));
 document.getElementById('return-menu').addEventListener('click',()=>{document.getElementById('pause-menu').classList.add('hidden');document.getElementById('game-hud').classList.add('hidden');document.getElementById('main-menu').classList.remove('menu-hidden');document.body.classList.remove('playing')});
 document.querySelectorAll('#legacy [data-open]').forEach(btn=>btn.addEventListener('click',()=>openPanel(btn.dataset.open)));
-startIsland({onInteract:openPanel,onClock:value=>{const el=document.getElementById('world-time');if(el)el.textContent=value}});
+startIsland({onInteract:id=>{if(id&&id!=='journal'&&!state.visited.includes(id)){state.visited.push(id);save()}openPanel(id==='garden'?'journal':id)},onClock:value=>{const el=document.getElementById('world-time');if(el)el.textContent=value}});
